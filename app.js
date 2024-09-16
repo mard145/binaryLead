@@ -3,9 +3,9 @@ const database = require('./database/database')
 const axios = require('axios');
 const User = require('./models/User')
 const CurrencyPair = require('./models/Pairs')
-
+const auth = require('./controllers/auth')
 const SelectedFlag = require('./models/SelectedFlag')
-
+const jwt = require('jsonwebtoken')
 // Seu app_id obtido ao registrar na Open Exchange Rates
 const appId = process.env.OPEN_EXCHANGE_RATES; // Substitua pelo seu app_id
 const methodOverride = require('method-override')
@@ -63,6 +63,48 @@ app.get('/',async (req,res)=>{
     
 })
 
+app.get('/login',(req,res)=>{
+  res.render('login')
+})
+
+app.post('/login',async (req,res,next)=>{
+
+  try {
+  
+      const {email,password} = await req.body
+      const user = await User.findOne({email:email})
+    
+      if( user.password == null || !user.password || user.password == undefined){
+        res.render('login', {msg:'Usuário ou senha incorretos',error:false})
+      }
+    
+      const pass = bcrypt.compareSync(password, user.password)
+    
+      if(!user || !pass ){
+        res.render('login', {msg:'Usuário ou password incorretos', error:false})
+      }
+      
+      if(user && pass){
+        const token = jwt.sign({ _id:user._id }, process.env.TOKEN_SECRET, {
+          expiresIn: '7d' // expires in 5min
+        });
+        res.cookie('Authorization', `${token}`)
+    console.log(token)
+    
+      if(user.admin == true){
+        res.redirect('/admin')
+  
+      }else{
+        res.redirect('/')
+      }
+     
+      }
+      } catch (error) {
+        console.log(error)
+      }
+    
+})
+
 app.post('/admin/savePreSelected',async (req,res)=>{
 try {
     let {combination,id} = await req.body
@@ -91,7 +133,7 @@ return res.redirect('/admin')
   
 })
 
-app.get('/admin',async (req,res)=>{
+app.get('/admin',auth,async (req,res)=>{
     let users = await User.find({})
     let pairs = await CurrencyPair.find({})
 let preSelected = await SelectedFlag.findOne({})
