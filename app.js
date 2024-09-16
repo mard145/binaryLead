@@ -12,6 +12,7 @@ const methodOverride = require('method-override')
 const bcrypt = require('bcryptjs')
 // URL da API
 const url = `https://openexchangerates.org/api/currencies.json?app_id=`;
+const puppeteer = require('puppeteer');
 
 async function currencies(){
 
@@ -65,6 +66,61 @@ app.get('/',async (req,res)=>{
 
 app.get('/login',(req,res)=>{
   res.render('login')
+})
+
+app.get('/register',(req,res)=>{
+  res.render('register')
+})
+
+app.post('/register', async (req,res)=>{
+try {
+  (async () => {
+    // Inicializa o navegador e abre uma nova página
+    let {name,lastname,photo,password,email} = await req.body
+
+    const browser = await puppeteer.launch({ 
+      headless: false,
+      executablePath: '/usr/bin/chromium-browser', // ou '/usr/bin/google-chrome'
+    }); // Use headless: true para rodar sem abrir a janela
+    const page = await browser.newPage();
+  
+    // Navega para o URL da página de registro
+    await page.goto('https://trade.avalonbroker.io/register?aff=415182&aff_model=revenue&afftrack=');
+  
+    // Preenche o campo 'Nome'
+    await page.type('input[name="first_name"]', name);
+  
+    // Preenche o campo 'Sobrenome'
+    await page.type('input[name="last_name"]', lastname);
+  
+    // Seleciona o país 'Brasil'
+    await page.click('[data-test-id="register-country-select-select_header"]');
+    await page.select('select[data-test-id="register-country-select-select"]', '2'); // Valor '2' corresponde ao Brasil
+  
+    // Preenche o campo 'E-mail'
+    await page.type('input[name="identifier"]', email);
+  
+    // Preenche o campo 'Senha'
+    await page.type('input[name="password"]', password);
+  
+    // Marca o checkbox para aceitar os termos e condições
+    await page.click('input[type="checkbox"]');
+  
+    // Submete o formulário
+    await page.click('[data-test-id="register-submit-button"]');
+  
+    // Aguarda a navegação para a próxima página
+    await page.waitForNavigation();
+  
+    // Fecha o navegador
+    await browser.close();
+  })();
+  res.redirect('/login')
+} catch (error) {
+  console.log(error)
+}
+
+
 })
 
 app.post('/login',async (req,res,next)=>{
