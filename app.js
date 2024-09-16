@@ -12,7 +12,7 @@ const methodOverride = require('method-override')
 const bcrypt = require('bcryptjs')
 // URL da API
 const url = `https://openexchangerates.org/api/currencies.json?app_id=`;
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 
 async function currencies(){
 
@@ -80,7 +80,8 @@ try {
 
     const browser = await puppeteer.launch({ 
       headless: false,
-      executablePath: '/usr/bin/chromium-browser', // ou '/usr/bin/google-chrome'
+      executablePath: '/usr/bin/chromium-browser', 
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
     }); // Use headless: true para rodar sem abrir a janela
     const page = await browser.newPage();
   
