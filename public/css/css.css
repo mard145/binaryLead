@@ -149,3 +149,86 @@
   font-display: swap;
   src: url(../fonts/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjoJYOmb2Rm.ttf) format('truetype');
 }
+
+
+/* CSS media query dentro de um stylesheet */
+@media (max-width: 1024px) {
+  .list-container {
+    margin-left: 100px;
+    z-index: 9999 !important;
+  }
+}
+
+
+@media (max-width: 898px) {
+  .list-container {
+    margin-left: 150px;
+  }
+}
+
+
+@media (max-width: 804px) {
+  .list-container {
+    margin-left: 190px;
+  }
+}
+
+
+
+@media (max-width: 789px) {
+  .list-container {
+    margin-left: 190px;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .list-container {
+    margin-left: 190px;
+  }
+  .flag-container {
+    flex-direction: column;
+  }
+  .item-list{
+    height: 500px !important;
+  }
+}
+
+
+@media (max-width: 473px) {
+  .list-container {
+    margin-left: 190px;
+    justify-content: center;
+
+  }
+}
+
+@media (max-width: 473px) {
+  .list-container {
+    margin-left: 190px;
+    justify-content: center;
+
+  }
+}
+
+@media (max-width: 409px) {
+  .list-container {
+    margin-left: 190px;
+    justify-content: center;
+
+  }
+  .item-list{
+    height: 900px !important;
+  }
+}
+
+@media (max-width: 317px) {
+  .list-container {
+    margin-left: 190px;
+    display: block;
+
+  }
+  .item-list{
+    height: 900px !important;
+  }
+}
