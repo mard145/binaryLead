@@ -134,10 +134,17 @@ return res.redirect('/admin')
 })
 
 app.get('/admin',auth,async (req,res)=>{
+  let user = await req.user
+  if(req.user.admin){
     let users = await User.find({})
     let pairs = await CurrencyPair.find({})
 let preSelected = await SelectedFlag.findOne({})
     res.render('admin', {users:users,pairs:pairs,preSelected:preSelected})
+
+  }else{
+    res.redirect('/')
+  }
+   
 })
 
 app.put('/admin/editUser/:_id',  async (req,res)=>{

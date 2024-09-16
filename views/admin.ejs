@@ -23,6 +23,9 @@
         <li class="nav-item" role="presentation">
           <button class="nav-link text-light" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Usuários</button>
         </li>
+        <li class="nav-item" role="presentation"></li>
+          <button class="nav-link text-light" id="" type="button" onclick="logout()">Deslogar</button>
+        </li>
         <!--<li class="nav-item" role="presentation">
           <button class="nav-link text-light" id="document-tab" data-bs-toggle="tab" data-bs-target="#document-tab-pane" type="button" role="tab" aria-controls="document-tab-pane" aria-selected="false">Documento e texto</button>
         </li>
@@ -777,6 +780,21 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script>
+      async function logout(){
+        function deleteCookie(name) {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    // Definir a nova rota
+    var newRoute = '/'; // Substitua '/nova-rota' pela rota desejada
+    
+    // Redirecionar para a nova rota
+    window.location.href = '/';
+    }
+    
+    // Remover o cookie 'Authorization'
+    deleteCookie('Authorization');
+        }
+        
+    </script>
 </body>
 </html>
