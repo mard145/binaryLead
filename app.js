@@ -113,7 +113,7 @@ try {
     await page.waitForNavigation();
   
     // Fecha o navegador
-    await browser.close();
+ //   await browser.close();
   })();
   res.redirect('/login')
 } catch (error) {
