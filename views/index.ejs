@@ -433,6 +433,8 @@
   <link rel="alternate" type="text/xml+oembed" href="https://adminroot.site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fadminroot.site%2Fapp-b%2F&amp;format=xml">
   <meta name="generator" content="Elementor 3.19.4; features: e_optimized_assets_loading, e_optimized_css_loading, additional_custom_breakpoints, block_editor_assets_optimize, e_image_loading_optimization; settings: css_print_method-external, google_font-enabled, font_display-swap">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="images/tayus-logo.png" type="image/png">
+
 </head>
 
 <body class="page-template page-template-elementor_canvas page page-id-607 elementor-default elementor-template-canvas elementor-kit-5 elementor-page elementor-page-607">
@@ -976,10 +978,11 @@ lists.forEach(function(list) {
               <div class="elementor-widget-container">
                 <div class="selected-asset" style="display: flex; align-items: center; gap: 5px; margin-top: 20px; color: white;">
                     <%if(preSelected){%>
+                      <span style='display: flex;'>
                         <img decoding="async" src="<%=preSelected.quoteCurrencyFlag%>" alt="Selected Flag" class="flag-img-moedass" id="selected-flagg" style='width:30px;'>
 
                         <img decoding="async" src="<%=preSelected.baseCurrencyFlag%>" alt="Selected Flag" class="flag-img-moedas" id="selected-flag">
-
+                      </span>
                         <span id="selected-asset-text">
                             <%=preSelected.combination%>
                         </span>
@@ -1988,6 +1991,19 @@ lists.forEach(function(list) {
                   }
 
                   /* CSS media query dentro de um stylesheet */
+
+@media (max-width: 409px) {
+  .list-container {
+    margin-left: 190px !important;
+    justify-content: center !important;
+
+  }
+  .item-list{
+    height: 900px !important;
+  }
+}
+
+
 @media (max-width: 1024px) {
   .list-container {
     margin-left: 100px !important;
@@ -2031,6 +2047,22 @@ lists.forEach(function(list) {
 }
 
 
+@media (max-width: 735px) {
+  .selected-asset
+{
+  flex-direction: column;
+}
+
+.list-item {
+    padding: 10px 35px 10px 10px;
+    cursor: pointer;
+    background: #333;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    margin-top: 20px !important;
+}
+}
+
 @media (max-width: 473px) {
   .list-container {
     margin-left: 190px !important;
@@ -2058,6 +2090,14 @@ lists.forEach(function(list) {
   }
 }
 
+@media (max-width: 399px) {
+  .list-container {
+    margin-left: 100px !important;
+    justify-content: center !important;
+
+  }
+}
+
 @media (max-width: 317px) {
   .list-container {
     margin-left: 190px !important;
@@ -2068,6 +2108,8 @@ lists.forEach(function(list) {
     height: 900px !important;
   }
 }
+
+
                 </style>
               </div>
             </div>
