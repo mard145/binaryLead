@@ -1,7 +1,7 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 // Conectar ao MongoDB
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect('mongodb+srv://atlasmongo46:GvXQafANrGPLMzD9@cluster0.xkpmrq4.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
