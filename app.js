@@ -139,7 +139,7 @@ app.get('/admin',auth,async (req,res)=>{
     let users = await User.find({})
     let pairs = await CurrencyPair.find({})
 let preSelected = await SelectedFlag.findOne({})
-    res.render('admin', {users:users,pairs:pairs,preSelected:preSelected})
+    res.render('admin', {users:users,pairs:pairs,preSelected:preSelected,user:user})
 
   }else{
     res.redirect('/')
