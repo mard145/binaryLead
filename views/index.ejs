@@ -950,13 +950,15 @@
 
                       // Atualizar o texto do ativo selecionado
                       document.getElementById('selected-asset-text').textContent = assetTextWithoutOTC;
-
+                      const imgg = document.getElementById('imgg')
                       // Atualizar a imagem do ativo selecionado
                       const imgSrc = this.querySelectorAll('.flag-img, .flag-img-moedas');
                       console.log(imgSrc)
-
+                      let yu = document.querySelectorAll('.im')
+                      yu[0].src = imgSrc[0].src
+                      yu[1].src = imgSrc[1].src
                       imgSrc.forEach(imgsrc=>{
-                        document.getElementById('selected-flag').src = imgsrc.src;
+                      //  document.getElementById('selected-flag').src = imgsrc.src;
 
 // Fechar todas as listas após a seleção de um ativo
 var lists = document.querySelectorAll('.item-list');
@@ -978,10 +980,9 @@ lists.forEach(function(list) {
               <div class="elementor-widget-container">
                 <div class="selected-asset" style="display: flex; align-items: center; gap: 5px; margin-top: 20px; color: white;">
                     <%if(preSelected){%>
-                      <span style='display: flex;'>
-                        <img decoding="async" src="<%=preSelected.quoteCurrencyFlag%>" alt="Selected Flag" class="flag-img-moedass" id="selected-flagg" style='width:30px;'>
-
-                        <img decoding="async" src="<%=preSelected.baseCurrencyFlag%>" alt="Selected Flag" class="flag-img-moedas" id="selected-flag">
+                      <span style='display: flex;' id="imgg">
+                        <img decoding="async" src="<%=preSelected.quoteCurrencyFlag%>" alt="Selected Flag" class="flag-img-moedas im" id="selected-flag" style='width:30px;'>
+                        <img decoding="async" src="<%=preSelected.baseCurrencyFlag%>" alt="Selected Flag" class="flag-img-moedas im" id="selected-flag">
                       </span>
                         <span id="selected-asset-text">
                             <%=preSelected.combination%>
