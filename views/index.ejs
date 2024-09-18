@@ -950,15 +950,29 @@
 
                       // Atualizar o texto do ativo selecionado
                       document.getElementById('selected-asset-text').textContent = assetTextWithoutOTC;
-                      const imgg = document.getElementById('imgg')
+                      const imgg = document.querySelectorAll('.imgg')
+                      console.log(imgg[0].children.length)
                       // Atualizar a imagem do ativo selecionado
                       const imgSrc = this.querySelectorAll('.flag-img, .flag-img-moedas');
-                      console.log(imgSrc)
+                    
+                      console.log(imgSrc[1].src, window.location.host, 'ppppppppppp')
                       let yu = document.querySelectorAll('.im')
+                      console.log(yu,'owijdajdaw')
                       yu[0].src = imgSrc[0].src
-                      yu[1].src = imgSrc[1].src
+                     
+                      if(imgSrc[1].src == `${window.location.origin}/` ){
+                        yu[1].style.display = 'none'
+
+                      }else{
+                        yu[1].style.display = 'block'
+
+                        yu[1].src = imgSrc[1].src
+
+                      }
                       imgSrc.forEach(imgsrc=>{
                       //  document.getElementById('selected-flag').src = imgsrc.src;
+                      
+                      console.log(yu[1].src)
 
 // Fechar todas as listas após a seleção de um ativo
 var lists = document.querySelectorAll('.item-list');
@@ -980,7 +994,7 @@ lists.forEach(function(list) {
               <div class="elementor-widget-container">
                 <div class="selected-asset" style="display: flex; align-items: center; gap: 5px; margin-top: 20px; color: white;">
                     <%if(preSelected){%>
-                      <span style='display: flex;' id="imgg">
+                      <span style='display: flex;' class="imgg">
                         <img decoding="async" src="<%=preSelected.quoteCurrencyFlag%>" alt="Selected Flag" class="flag-img-moedas im" id="selected-flag" style='width:30px;'>
                         <img decoding="async" src="<%=preSelected.baseCurrencyFlag%>" alt="Selected Flag" class="flag-img-moedas im" id="selected-flag">
                       </span>
